@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Título da página</title>
+    <meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+	<script>
+	//OBS - POSITION CORRETA É LONGETUDE E LAGITUDE
+	var from = "-55.916290,-13.066770";
+	var to = "-55.725403,-12.538478";
+	
+	var url = "https://router.project-osrm.org/route/v1/driving/"+from+";"+to+"?exclude=motorway&annotations=false";
+	$.get( url, function(data){		
+		//console.log(data);
+		var result = data;
+		var distance = result.routes[0]["distance"];
+		var distanceKm = Math.round(result.routes[0]["distance"] / 1000);
+		//console.log(distanceKm+" KM");
+		document.getElementById("distancia").value = distanceKm;
+	});
+	</script>
+	<form>
+		<label for="fname">Distancia:</label>
+		<input type="text" id="distancia" name="distancia"><br><br>
+	</form>
+  </body>
+</html>
